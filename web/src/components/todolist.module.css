@@ -1,0 +1,64 @@
+.table {
+    background-color: #ecedf6;
+    width: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 8px;
+    padding-bottom: 10px;
+}
+
+.actionDiv {
+    display: flex;
+    width: 800px;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.header {
+    display: flex;
+    width: 95%;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.data {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    gap: 10px;
+    margin: 10px;
+}
+
+.rowItem {
+    display: flex;
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.title,
+.desc,
+.status {
+    width: 33.33%;
+}
+
+.action {
+    width: 12%;
+}
+
+.btn {
+    padding: 5px 10px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}

@@ -1,0 +1,22 @@
+.rowItem {
+    display: flex;
+    width: 100%;
+    /* justify-content: space-around; */
+}
+
+.title,
+.desc,
+.status {
+    width: 33.33%;
+}
+
+.action {
+    width: 11%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.actionButton {
+    cursor: pointer;
+}
