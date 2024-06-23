@@ -56,3 +56,56 @@ cd web
 npm install or yarn install
 npm run dev or yarn run dev
 ```
+
+# Task Management Application
+
+## User Interface
+
+- A form to create a new task with fields for title, description, and status.
+- A list of tasks with the ability to update the status or delete a task.
+- A filter or dropdown to filter tasks by status (e.g., "All," "To Do," "In Progress," "Done").
+
+## User Experience
+
+- Smooth and responsive user interactions.
+- Form validation to ensure tasks cannot be created without a title.
+- Modern front-end technologies used (React, Vite).
+  
+## Styling
+
+- Application styled using CSS.
+- Responsive design ensuring it works well on both desktop and mobile devices.
+
+## API Development
+
+- RESTful API to handle CRUD operations for tasks.
+- Implemented using Node.js and Express.js.
+
+## Data Storage
+
+- MongoDB used to store task data.
+
+## Validation
+
+- Server-side validation ensuring tasks have a title and a valid status.
+
+## Error Handling
+
+- Proper error handling with appropriate error messages and status codes.
+
+## Code Quality
+
+- Clean, well-documented, and maintainable code.
+- Coding best practices and conventions followed.
+
+## Version Control
+
+- Git used to track changes in the code.
+
+## Testing
+
+- Unit tests written for critical parts of the application, such as API endpoints and data validation.
+
+## Security
+
+- Basic security measures implemented to protect the application from common vulnerabilities.
