@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import { useForm, Controller } from "react-hook-form";
-import styles from "./taskform.module.css"; // Import the CSS file
-import axios from "axios";
-import { toast } from "react-toastify";
-import CustomSelect from "../../components/Select/select";
+import { useForm, Controller } from "react-hook-form"; // Importing useForm and Controller from react-hook-form
+import styles from "./taskform.module.css"; // Importing CSS module for styling
+import axios from "axios"; // Importing Axios for making HTTP requests
+import { toast } from "react-toastify"; // Importing react-toastify for displaying toast notifications
+import CustomSelect from "../../components/Select/select"; // Importing CustomSelect component
 
 interface TaskFormValues {
   _id?: string;
@@ -11,10 +11,9 @@ interface TaskFormValues {
   desc: string;
   status: "todo" | "inprogress" | "done";
 }
-
 interface TaskFormProps {
-  dataSaveSuccess: () => void;
-  editData?: TaskFormValues; // Change to match the TaskFormValues interface
+  dataSaveSuccess: () => void; // Callback function for successful data save
+  editData?: TaskFormValues; // Optional prop for pre-filled form data in edit mode
 }
 
 const TaskForm = ({ dataSaveSuccess, editData }: TaskFormProps) => {
@@ -23,10 +22,10 @@ const TaskForm = ({ dataSaveSuccess, editData }: TaskFormProps) => {
     handleSubmit,
     formState: { errors },
     reset,
-    setValue, // Add setValue to set form values manually
+    setValue, // Function to set form field values manually
   } = useForm<TaskFormValues>({
     defaultValues: {
-      _id: "", // Include _id in the defaultValues
+      _id: "", // Default values for form fields
       title: "",
       desc: "",
       status: "todo",
@@ -34,47 +33,52 @@ const TaskForm = ({ dataSaveSuccess, editData }: TaskFormProps) => {
   });
 
   useEffect(() => {
+    // Effect to set form values when editData changes
     if (editData) {
-      setValue("_id", editData._id); // Set the _id value
-      setValue("title", editData.title);
-      setValue("desc", editData.desc);
-      setValue("status", editData.status);
+      setValue("_id", editData._id); // Set _id field
+      setValue("title", editData.title); // Set title field
+      setValue("desc", editData.desc); // Set desc field
+      setValue("status", editData.status); // Set status field
     }
-  }, [editData, setValue]);
+  }, [editData, setValue]); // Dependency array ensures useEffect runs when editData changes
 
   const onSubmit = async (data: TaskFormValues) => {
     try {
+      // Log form data
       console.log({ data });
 
-      // If _id is present, use PUT to update the existing task, otherwise use POST to create a new task
+      // Determine URL based on whether _id is present (for update) or not (for create)
       const url = data._id
         ? `http://localhost:5000/todo/update`
         : "http://localhost:5000/todo/save/form";
 
+      // Make POST request to save or update task
       const response = await axios.post(url, data);
 
+      // Handle response based on status code
       if (response?.data?.statusCode === 200) {
-        dataSaveSuccess();
+        dataSaveSuccess(); // Call callback function on successful save
         toast.success(response?.data?.message, {
-          position: "top-right",
+          position: "top-right", // Position of toast notification
         });
       } else {
         toast.warning(response?.data?.message, {
-          position: "top-right",
+          position: "top-right", // Position of toast notification
         });
       }
 
-      reset();
+      reset(); // Reset form fields after submission
     } catch (error) {
-      console.log(error, "error");
+      console.log(error, "error"); // Log error to console
       toast.error("Something went wrong while saving item!!", {
-        position: "top-right",
+        position: "top-right", // Position of toast notification
       });
     }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.taskForm}>
+      {/* Title input field */}
       <div className={styles.formGroup}>
         <label htmlFor="title">Title</label>
         <Controller
@@ -94,6 +98,7 @@ const TaskForm = ({ dataSaveSuccess, editData }: TaskFormProps) => {
           <div className={styles.invalidFeedback}>{errors.title.message}</div>
         )}
       </div>
+      {/* Description input field */}
       <div className={styles.formGroup}>
         <label htmlFor="desc">Description</label>
         <Controller
@@ -108,6 +113,7 @@ const TaskForm = ({ dataSaveSuccess, editData }: TaskFormProps) => {
           <div className={styles.invalidFeedback}>{errors.desc.message}</div>
         )}
       </div>
+      {/* Status select dropdown */}
       <div className={styles.formGroup}>
         <label htmlFor="status">Status</label>
         <Controller
@@ -126,6 +132,7 @@ const TaskForm = ({ dataSaveSuccess, editData }: TaskFormProps) => {
           <div className={styles.invalidFeedback}>{errors.status.message}</div>
         )}
       </div>
+      {/* Submit button */}
       <button type="submit" className={styles.btn}>
         {editData ? "Update Task" : "Add Task"}
       </button>
@@ -133,4 +140,4 @@ const TaskForm = ({ dataSaveSuccess, editData }: TaskFormProps) => {
   );
 };
 
-export default TaskForm;
+export default TaskForm; // Export TaskForm component
