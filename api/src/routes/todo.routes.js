@@ -5,12 +5,15 @@ import {
   todoFormData,
   updateTodoItem,
 } from "../controllers/todo.controller.js";
+
+// Initialize Express Router
 const router = Router();
 
-// ---------------Secured routes-----------------
-router.route("/save/form").post(todoFormData);
-router.route("/list").get(getTodoList);
-router.route("/update").post(updateTodoItem);
-router.route("/remove").post(removeTodoItem);
+// Define routes for different Todo operations
+router.route("/save/form").post(todoFormData); // Route to save Todo form data
+router.route("/list").get(getTodoList); // Route to get the list of Todo items
+router.route("/update").post(updateTodoItem); // Route to update a Todo item
+router.route("/remove").post(removeTodoItem); // Route to remove a Todo item
 
+// Export the router with defined routes
 export default router;
