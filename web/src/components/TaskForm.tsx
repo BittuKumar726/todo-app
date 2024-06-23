@@ -1,17 +1,14 @@
-import React, { useContext } from "react";
 import { useForm, Controller } from "react-hook-form";
-// import { TaskContext } from '../context/TaskContext';
 import styles from "./task.module.css"; // Import the CSS file
+import axios from "axios";
 
 interface TaskFormValues {
   title: string;
-  description: string;
+  desc: string;
   status: "To Do" | "In Progress" | "Done";
 }
 
 const TaskForm = () => {
-  // const { addTask } = useContext(TaskContext)!;
-
   const {
     control,
     handleSubmit,
@@ -20,14 +17,18 @@ const TaskForm = () => {
   } = useForm<TaskFormValues>({
     defaultValues: {
       title: "",
-      description: "",
+      desc: "",
       status: "To Do",
     },
   });
 
-  const onSubmit = (data: TaskFormValues) => {
-    // addTask(data);
+  const onSubmit = async (data: TaskFormValues) => {
     console.log({ data });
+    const response = await axios.post(
+      "http://localhost:5000/todo/save/form",
+      data
+    );
+    console.log({ response });
 
     reset();
   };
@@ -54,19 +55,17 @@ const TaskForm = () => {
         )}
       </div>
       <div className={styles.formGroup}>
-        <label htmlFor="description">Description</label>
+        <label htmlFor="desc">Description</label>
         <Controller
-          name="description"
+          name="desc"
           rules={{ required: "Description is required" }}
           control={control}
           render={({ field }) => (
             <input {...field} className={styles.formControl} />
           )}
         />
-        {errors.description && (
-          <div className={styles.invalidFeedback}>
-            {errors.description.message}
-          </div>
+        {errors.desc && (
+          <div className={styles.invalidFeedback}>{errors.desc.message}</div>
         )}
       </div>
       <div className={styles.formGroup}>
@@ -82,9 +81,9 @@ const TaskForm = () => {
                 errors.status ? styles.isInvalid : ""
               }`}
             >
-              <option value="To Do">To Do</option>
-              <option value="In Progress">In Progress</option>
-              <option value="Done">Done</option>
+              <option value="todo">To Do</option>
+              <option value="inprogress">In Progress</option>
+              <option value="done">Done</option>
             </select>
           )}
         />
