@@ -1,6 +1,6 @@
-import { useState } from "react";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
-import TodoList from "./components/TodoList";
+import TodoList from "./Pages/List/TodoList";
 
 function App() {
   return (
