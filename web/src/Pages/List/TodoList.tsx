@@ -107,7 +107,21 @@ const TodoList = () => {
               );
             })
           ) : (
-            <span className={styles.noDataMessage}>No data found!!</span>
+            <span
+              style={{
+                display: "flex",
+                textAlign: "center",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "350px",
+                width: "100%",
+                fontSize: "20px",
+                fontWeight: "bold",
+                color: "gray",
+              }}
+            >
+              No data found!!
+            </span>
           )}
         </div>
       </div>
