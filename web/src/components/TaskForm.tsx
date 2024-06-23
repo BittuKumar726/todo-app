@@ -27,6 +27,8 @@ const TaskForm = () => {
 
   const onSubmit = (data: TaskFormValues) => {
     // addTask(data);
+    console.log({ data });
+
     reset();
   };
 
@@ -55,11 +57,17 @@ const TaskForm = () => {
         <label htmlFor="description">Description</label>
         <Controller
           name="description"
+          rules={{ required: "Description is required" }}
           control={control}
           render={({ field }) => (
             <input {...field} className={styles.formControl} />
           )}
         />
+        {errors.description && (
+          <div className={styles.invalidFeedback}>
+            {errors.description.message}
+          </div>
+        )}
       </div>
       <div className={styles.formGroup}>
         <label htmlFor="status">Status</label>

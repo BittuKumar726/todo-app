@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import TodoItemRow from "./TodoItemRow";
 import styles from "./todolist.module.css";
+import Modal from "./Modal/Modal";
+import CustomModal from "./Modal/Modal";
+import TaskForm from "./TaskForm";
 const TodoList = () => {
   const [taskList, setTaskList] = useState([
     {
@@ -16,11 +19,28 @@ const TodoList = () => {
       status: "done",
     },
   ]);
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  const confirmModal = () => {
+    console.log("Confirmed!");
+    setModalOpen(false);
+  };
+
   return (
     <>
       <div className={styles.actionDiv}>
         <div>
-          <button className={styles.btn}>Add Task</button>
+          <button onClick={openModal} className={styles.btn}>
+            Add Task
+          </button>
         </div>
         <div>Filter</div>
       </div>
@@ -42,6 +62,15 @@ const TodoList = () => {
           })}
         </div>
       </div>
+      <CustomModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        onConfirm={confirmModal}
+        title="Custom Modal Title"
+        hideFooter={true}
+      >
+        <TaskForm />
+      </CustomModal>
     </>
   );
 };

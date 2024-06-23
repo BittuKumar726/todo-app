@@ -8,6 +8,9 @@
 .desc,
 .status {
     width: 33.33%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .action {
