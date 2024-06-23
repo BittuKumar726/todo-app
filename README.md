@@ -57,7 +57,7 @@ npm install or yarn install
 npm run dev or yarn run dev
 ```
 
-# Task Management Application
+# Task Management
 
 ## User Interface
 
