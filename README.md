@@ -102,10 +102,6 @@ npm run dev or yarn run dev
 
 - Git used to track changes in the code.
 
-## Testing
-
-- Unit tests written for critical parts of the application, such as API endpoints and data validation.
-
 ## Security
 
 - Basic security measures implemented to protect the application from common vulnerabilities.
